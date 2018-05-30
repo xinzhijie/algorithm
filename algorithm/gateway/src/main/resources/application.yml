@@ -1,0 +1,22 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: gateway
+eureka:
+  instance:
+    prefer-ip-address: false
+    ip-address: localhost
+    instance-id: ${spring.application.name}:${CFG_ADMIN_HOST:localhost}:${server.port}
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://${CFG_EUREKA_HOST:localhost}:${CFG_EUREKA_PORT:8761}/eureka/
+zuul:
+  prefix: /api
+  routes:
+    alg:
+      path: /alg/**
+    ribbon:
+      ReadTimeout: 60000
+      ConnectTimeout: 60000
