@@ -1,7 +1,6 @@
 package com.zsy.alg.controller;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -24,17 +23,12 @@ public class RunController {
         testData = URLDecoder.decode(testData,"UTF-8");
         testData = testData.substring(testData.lastIndexOf("["),testData.lastIndexOf("]")+1);
 
-//        System.out.println(trainingData);
-//        System.out.println(testData);
-//        JSONArray trainingDataArray = JSONArray.fromObject(trainingData);
-//        JSONArray testDataArray = JSONArray.fromObject(testData);
         String result = "";
         try {
             result = knn("/home/lmc/anaconda2/bin/python2.7", trainingData, testData );
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(result);
         JSONArray resultArray = JSONArray.fromObject(result);
         List list = new ArrayList();
         if(resultArray.size()>0) {
