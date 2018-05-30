@@ -1,6 +1,7 @@
 package com.zsy.alg.controller;
 
 import net.sf.json.JSONArray;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,6 +16,9 @@ import static knn.KNN2.knn;
 @RequestMapping(value = "/run")
 public class RunController {
 
+    @Value("${anaconda.address}")
+    private String pythonAddress;
+
     @PostMapping(value = "/knn")
     public List getUser(@RequestBody String trainingData, @RequestBody String testData) throws UnsupportedEncodingException {
         trainingData = URLDecoder.decode(trainingData,"UTF-8");
@@ -25,7 +29,7 @@ public class RunController {
 
         String result = "";
         try {
-            result = knn("/home/lmc/anaconda2/bin/python2.7", trainingData, testData );
+            result = knn(pythonAddress, trainingData, testData );
         } catch (IOException e) {
             e.printStackTrace();
         }

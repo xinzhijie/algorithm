@@ -1,5 +1,7 @@
 server:
   port: 8080
+anaconda:
+  address: /home/lmc/anaconda2/bin/python2.7
 spring:
   application:
     name: alg
